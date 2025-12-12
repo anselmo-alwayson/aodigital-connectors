@@ -1,0 +1,66 @@
+data:
+  ab_internal:
+    ql: 300
+    sl: 100
+  allowedHosts:
+    hosts:
+      - api.chartmogul.com
+  registryOverrides:
+    oss:
+      enabled: true
+    cloud:
+      enabled: true
+  remoteRegistries:
+    pypi:
+      enabled: false
+      packageName: airbyte-source-chartmogul
+  connectorBuildOptions:
+    # baseImage original: docker.io/airbyte/source-declarative-manifest:7.5.1@sha256:8da9d362c184e2e46532ab94f6f9968a74835c0882d6a4a2f9f9c9e5b972f2a1
+    baseImage: docker.io/anselmoalwayson/source-chartmogul:latest
+  connectorSubtype: api
+  connectorType: source
+  definitionId: b6604cbd-1b12-4c08-8767-e140d0fb0877
+  dockerImageTag: 1.1.38
+  dockerRepository: airbyte/source-chartmogul
+  githubIssueLabel: source-chartmogul
+  icon: chartmogul.svg
+  license: ELv2
+  name: Chartmogul
+  releaseDate: 2022-01-10T00:00:00.000Z
+  releases:
+    breakingChanges:
+      1.0.0:
+        message: This version separates the `customer_count` stream into multiple streams (daily, weekly, monthly, quarterly). Users previously using the `customer_count` stream will need to run a reset to enable the new streams and continue syncing.
+        upgradeDeadline: '2023-11-29'
+  releaseStage: beta
+  supportLevel: community
+  documentationUrl: https://docs.airbyte.com/integrations/sources/chartmogul
+  tags:
+    - cdk:low-code
+    - language:manifest-only
+  connectorTestSuitesOptions:
+    - suite: liveTests
+      testConnections:
+        - name: chartmogul_config_dev_null
+          id: 07daa31c-b7d0-4d3e-81c6-e6b7786a5c29
+    - suite: acceptanceTests
+      testSecrets:
+        - name: SECRET_SOURCE-CHARTMOGUL__CREDS
+          fileName: config.json
+          secretStore:
+            type: GSM
+            alias: airbyte-connector-testing-secret-store
+  externalDocumentationUrls:
+    - title: ChartMogul API reference
+      url: https://dev.chartmogul.com/reference
+      type: api_reference
+    - title: ChartMogul authentication
+      url: https://dev.chartmogul.com/docs/authentication
+      type: authentication_guide
+    - title: ChartMogul rate limits
+      url: https://dev.chartmogul.com/docs/rate-limits
+      type: rate_limits
+    - title: ChartMogul Status
+      url: https://status.chartmogul.com/
+      type: status_page
+metadataSpecVersion: '1.0'
